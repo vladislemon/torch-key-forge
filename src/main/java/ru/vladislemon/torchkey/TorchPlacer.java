@@ -2,6 +2,7 @@ package ru.vladislemon.torchkey;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,12 +15,7 @@ public class TorchPlacer {
     public TorchPlacer(final Minecraft minecraft, final TorchDetector torchDetector) {
         this.minecraft = minecraft;
         this.torchDetector = torchDetector;
-        try {
-            this.rightClickMouseMethod = minecraft.getClass().getDeclaredMethod("rightClickMouse");
-            this.rightClickMouseMethod.setAccessible(true);
-        } catch (final NoSuchMethodException e) {
-            throw new IllegalStateException(e);
-        }
+        this.rightClickMouseMethod = ObfuscationReflectionHelper.findMethod(minecraft.getClass(), "func_147121_ag");
     }
 
     public void tryPlaceTorch() {
