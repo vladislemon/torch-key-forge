@@ -35,7 +35,7 @@ public class TorchKeyForgeMod {
 
     @OnlyIn(Dist.CLIENT)
     private void onClientSetupEvent(final FMLClientSetupEvent event) {
-        TorchPlacer torchPlacer = new TorchPlacer(event.getMinecraftSupplier().get(), new TorchDetector());
+        final TorchPlacer torchPlacer = new TorchPlacer(event.getMinecraftSupplier().get(), new TorchDetector());
         new KeyBindingEventHandler(keyBinding, torchPlacer::tryPlaceTorch);
     }
 }

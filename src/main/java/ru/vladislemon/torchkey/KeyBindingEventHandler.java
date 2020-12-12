@@ -8,25 +8,25 @@ import org.lwjgl.glfw.GLFW;
 
 public class KeyBindingEventHandler {
     private final KeyBinding keyBinding;
-    private final Runnable runnable;
+    private final Runnable callback;
 
-    public KeyBindingEventHandler(KeyBinding keyBinding, Runnable runnable) {
+    public KeyBindingEventHandler(final KeyBinding keyBinding, final Runnable callback) {
         this.keyBinding = keyBinding;
-        this.runnable = runnable;
+        this.callback = callback;
         ClientRegistry.registerKeyBinding(keyBinding);
         MinecraftForge.EVENT_BUS.addListener(this::onKeyInputEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onMouseInputEvent);
     }
 
-    private void onKeyInputEvent(InputEvent.KeyInputEvent event) {
+    private void onKeyInputEvent(final InputEvent.KeyInputEvent event) {
         if (event.getAction() == GLFW.GLFW_PRESS && keyBinding.matchesKey(event.getKey(), event.getScanCode())) {
-            runnable.run();
+            callback.run();
         }
     }
 
-    private void onMouseInputEvent(InputEvent.MouseInputEvent event) {
+    private void onMouseInputEvent(final InputEvent.MouseInputEvent event) {
         if (event.getAction() == GLFW.GLFW_PRESS && keyBinding.matchesMouseKey(event.getButton())) {
-            runnable.run();
+            callback.run();
         }
     }
 }

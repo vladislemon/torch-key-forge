@@ -5,7 +5,7 @@ import net.minecraft.item.Items;
 
 public class TorchDetector {
 
-    public boolean isTorch(ItemStack itemStack) {
-        return itemStack.getItem() == Items.TORCH;
+    public boolean isTorch(final ItemStack itemStack) {
+        return Items.TORCH.equals(itemStack.getItem());
     }
 }

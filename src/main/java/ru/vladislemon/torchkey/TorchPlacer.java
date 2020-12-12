@@ -11,13 +11,13 @@ public class TorchPlacer {
     private final TorchDetector torchDetector;
     private final Method rightClickMouseMethod;
 
-    public TorchPlacer(Minecraft minecraft, TorchDetector torchDetector) {
+    public TorchPlacer(final Minecraft minecraft, final TorchDetector torchDetector) {
         this.minecraft = minecraft;
         this.torchDetector = torchDetector;
         try {
             this.rightClickMouseMethod = minecraft.getClass().getDeclaredMethod("rightClickMouse");
             this.rightClickMouseMethod.setAccessible(true);
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -26,7 +26,7 @@ public class TorchPlacer {
         if (minecraft == null || minecraft.player == null) {
             return;
         }
-        int previousItem = minecraft.player.inventory.currentItem;
+        final int previousItem = minecraft.player.inventory.currentItem;
         for (int i = 0; i < PlayerInventory.getHotbarSize(); i++) {
             if (torchDetector.isTorch(minecraft.player.inventory.mainInventory.get(i))) {
                 minecraft.player.inventory.currentItem = i;
@@ -40,7 +40,7 @@ public class TorchPlacer {
     private void tryRightClick() {
         try {
             rightClickMouseMethod.invoke(minecraft);
-        } catch (IllegalAccessException | InvocationTargetException e) {
+        } catch (final IllegalAccessException | InvocationTargetException e) {
             throw new IllegalStateException(e);
         }
     }
