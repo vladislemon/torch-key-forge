@@ -19,9 +19,10 @@ public class TorchPlacer {
     }
 
     public void tryPlaceTorch() {
-        if (minecraft == null || minecraft.player == null) {
+        if (!isWorldInFocus()) {
             return;
         }
+        //noinspection ConstantConditions
         final int previousItem = minecraft.player.inventory.currentItem;
         for (int i = 0; i < PlayerInventory.getHotbarSize(); i++) {
             if (torchDetector.isTorch(minecraft.player.inventory.mainInventory.get(i))) {
@@ -31,6 +32,20 @@ public class TorchPlacer {
                 return;
             }
         }
+    }
+
+    private boolean isWorldInFocus() {
+        if (minecraft == null) {
+            return false;
+        }
+        if (minecraft.player == null) {
+            return false;
+        }
+        //noinspection RedundantIfStatement
+        if (minecraft.currentScreen != null) {
+            return false;
+        }
+        return true;
     }
 
     private void tryRightClick() {
