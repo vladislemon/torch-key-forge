@@ -10,12 +10,14 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '0.3'
+version = '1.0.0-1.18'
 group = 'ru.vladislemon.torch-key-forge' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'torch-key-forge'
 
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 minecraft {
-    mappings channel: 'snapshot', version: '20210309-1.16.5'
+    mappings channel: 'official', version: '1.18'
     runs {
         client {
             workingDirectory project.file('run')
@@ -58,5 +60,5 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.19'
+    minecraft 'net.minecraftforge:forge:1.18-38.0.16'
 }

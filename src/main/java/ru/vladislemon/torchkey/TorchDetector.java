@@ -1,7 +1,7 @@
 package ru.vladislemon.torchkey;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.ItemStack;
 
 public class TorchDetector {
     private final Config config;

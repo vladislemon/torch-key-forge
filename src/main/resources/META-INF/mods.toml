@@ -1,9 +1,9 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[38,)"
 license="MIT"
 issueTrackerURL="https://github.com/vladislemon/torch-key-forge/issues"
 [[mods]]
-modId="torch-key-forge"
+modId="torch_key_forge"
 version="${file.jarVersion}"
 displayName="Torch Key"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/torch-key-forge"
