@@ -1,13 +1,21 @@
 package ru.vladislemon.torchkey;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TorchPlacer {
+    private static final int INVENTORY_SELECTION_SIZE;
+
+    static {
+        //noinspection ConstantConditions
+        INVENTORY_SELECTION_SIZE = ObfuscationReflectionHelper
+                .getPrivateValue(Inventory.class, null, "f_150070_");
+    }
+
     private final Minecraft minecraft;
     private final TorchDetector torchDetector;
     private final Method rightClickMouseMethod;
@@ -15,7 +23,7 @@ public class TorchPlacer {
     public TorchPlacer(final Minecraft minecraft, final TorchDetector torchDetector) {
         this.minecraft = minecraft;
         this.torchDetector = torchDetector;
-        this.rightClickMouseMethod = ObfuscationReflectionHelper.findMethod(minecraft.getClass(), "func_147121_ag");
+        this.rightClickMouseMethod = ObfuscationReflectionHelper.findMethod(minecraft.getClass(), "m_91277_");
     }
 
     public void tryPlaceTorch() {
@@ -23,12 +31,13 @@ public class TorchPlacer {
             return;
         }
         //noinspection ConstantConditions
-        final int previousItem = minecraft.player.inventory.currentItem;
-        for (int i = 0; i < PlayerInventory.getHotbarSize(); i++) {
-            if (torchDetector.isTorch(minecraft.player.inventory.mainInventory.get(i))) {
-                minecraft.player.inventory.currentItem = i;
+        final Inventory inventory = minecraft.player.getInventory();
+        final int previousItem = inventory.selected;
+        for (int i = 0; i < INVENTORY_SELECTION_SIZE; i++) {
+            if (torchDetector.isTorch(inventory.getItem(i))) {
+                inventory.selected = i;
                 tryRightClick();
-                minecraft.player.inventory.currentItem = previousItem;
+                inventory.selected = previousItem;
                 return;
             }
         }
@@ -42,7 +51,7 @@ public class TorchPlacer {
             return false;
         }
         //noinspection RedundantIfStatement
-        if (minecraft.currentScreen != null) {
+        if (minecraft.screen != null) {
             return false;
         }
         return true;

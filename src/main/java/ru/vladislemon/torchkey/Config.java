@@ -1,8 +1,8 @@
 package ru.vladislemon.torchkey;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.item.Items;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.List;
@@ -27,10 +27,9 @@ public class Config {
     }
 
     private static boolean validateTorchItems(final Object element) {
-        if (!(element instanceof String)) {
+        if (!(element instanceof final String s)) {
             return false;
         }
-        final String s = (String) element;
         return !s.trim().isEmpty();
     }
 }
