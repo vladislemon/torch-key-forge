@@ -18,7 +18,7 @@ import org.lwjgl.glfw.GLFW;
 
 @Mod(TorchKeyForgeMod.MOD_ID)
 public class TorchKeyForgeMod {
-    public static final String MOD_ID = "torch_key_forge";
+    public static final String MOD_ID = "torchkey";
 
     private final Config config;
     private final KeyMapping keyBinding = new KeyMapping(
