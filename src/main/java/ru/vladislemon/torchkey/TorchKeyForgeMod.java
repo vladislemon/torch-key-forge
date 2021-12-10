@@ -6,11 +6,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkConstants;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.glfw.GLFW;
 
@@ -34,12 +36,10 @@ public class TorchKeyForgeMod {
         //Register client initializer
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
         //Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
-        /*ModLoadingContext
-                .get()
-                .registerExtensionPoint(
-                        ExtensionPoint.DISPLAYTEST,
-                        () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true)
-                );*/
+        ModLoadingContext.get().registerExtensionPoint(
+                IExtensionPoint.DisplayTest.class,
+                () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (incoming, isNetwork) -> true)
+        );
     }
 
     @OnlyIn(Dist.CLIENT)
