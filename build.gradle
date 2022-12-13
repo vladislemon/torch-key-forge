@@ -10,18 +10,18 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '1.1.0-1.18.1'
+version = '1.2.0-1.19.3'
 group = 'ru.vladislemon.torchkey'
 project.archivesBaseName = 'torch-key-forge'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.0'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.0.0'
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.18.1'
+    mappings channel: 'official', version: '1.19.3'
     runs {
         client {
             workingDirectory project.file('run')

@@ -1,17 +1,17 @@
 package ru.vladislemon.torchkey;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Config {
-    @SuppressWarnings("deprecation")
     private static final List<String> DEFAULT_TORCH_ITEMS = ImmutableList.of(
-            Registry.ITEM.getKey(Items.TORCH).toString(),
-            Registry.ITEM.getKey(Items.SOUL_TORCH).toString()
+            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(Items.TORCH)).toString(),
+            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(Items.SOUL_TORCH)).toString()
     );
     private final ForgeConfigSpec.ConfigValue<List<? extends String>> torchItems;
 

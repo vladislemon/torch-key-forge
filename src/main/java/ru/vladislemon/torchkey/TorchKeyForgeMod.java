@@ -5,6 +5,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -35,6 +36,7 @@ public class TorchKeyForgeMod {
         config = configSpecPair.getKey();
         //Register client initializer
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetupEvent);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterKeyMappingsEvent e) -> e.register(keyBinding));
         //Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
         ModLoadingContext.get().registerExtensionPoint(
                 IExtensionPoint.DisplayTest.class,

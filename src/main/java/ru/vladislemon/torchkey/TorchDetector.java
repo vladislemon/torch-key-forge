@@ -1,7 +1,9 @@
 package ru.vladislemon.torchkey;
 
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Objects;
 
 public class TorchDetector {
     private final Config config;
@@ -11,8 +13,7 @@ public class TorchDetector {
     }
 
     public boolean isTorch(final ItemStack itemStack) {
-        //noinspection deprecation
-        final String itemId = Registry.ITEM.getKey(itemStack.getItem()).toString();
+        final String itemId = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(itemStack.getItem())).toString();
         return config.getTorchItems().contains(itemId);
     }
 }
