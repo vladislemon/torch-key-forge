@@ -10,7 +10,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = '1.2.0-1.19.3'
+version = '1.2.0-1.19.2'
 group = 'ru.vladislemon.torchkey'
 project.archivesBaseName = 'torch-key-forge'
 
