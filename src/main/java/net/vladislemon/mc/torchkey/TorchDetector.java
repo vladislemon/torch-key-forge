@@ -11,6 +11,9 @@ public class TorchDetector {
     }
 
     public boolean isTorch(ItemStack itemStack) {
+        if (itemStack == null) {
+            return false;
+        }
         String itemId = Item.itemRegistry.getNameForObject(itemStack.getItem());
         return config.getTorchItems().contains(itemId);
     }
